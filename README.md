@@ -22,12 +22,12 @@ npm install hammer-touchemulator
 ```
 
 ## How to use
-Include the javascript file, and call the `TouchEmulator()` function before any other libraries that do something with the 
+Include the javascript file, and call `TouchEmulator.start()` before any other libraries that do something with the
 touch input. It will set some fake properties to spoof the touch detection of some libraries, and triggers `touchstart`, `touchmove` and `touchend` events on the mouse target.
- 
+
 ````html
 <script src="touch-emulator.js"></script>
-<script> TouchEmulator(); </script>
+<script> TouchEmulator.start(); </script>
 ````
 
 ````js
@@ -42,11 +42,14 @@ document.body.addEventListener('touchend', log, false);
 
 Also, the script includes polyfills for `document.createTouch` and `document.createTouchList`.
 
+You can stop the touch emulator with `TouchEmulator.stop()` and restart it with another call to `TouchEmulator.start()`.
+In previous versions, the emulator was started by calling `TouchEmulator()`; that continues to work, too.
+
 ## How it works
 It listens to the `mousedown`, `mousemove` and `mouseup` events, and translates them to touch events. If the mouseevent
-has the `shiftKey` property to `true`, it enables multi-touch. 
+has the `shiftKey` property to `true`, it enables multi-touch.
 
-The script also prevents the following mouse events on the page: 
+The script also prevents the following mouse events on the page:
 `mousedown`, `mouseenter`, `mouseleave`, `mousemove`, `mouseout`, `mouseover` and `mouseup`.
 
 ## Web platform tests
